@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "BAVIQUE — Premium Girls' Accessories Catalogue & Boutique Platform",
   "scripts": {
-    "start": "node -e \"console.log('Run npm run dev:backend or npm run dev:frontend')\"",
+    "build": "cd frontend && npm run build",
+    "dev": "cd frontend && npm run dev",
     "dev:backend": "cd backend && npm start",
     "dev:frontend": "cd frontend && npm run dev",
     "seed": "cd backend && npm run seed",
