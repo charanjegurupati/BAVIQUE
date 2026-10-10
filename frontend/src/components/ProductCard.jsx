@@ -1,5 +1,6 @@
 import React from 'react';
 import { Eye, Sparkles } from 'lucide-react';
+import { getAssetUrl } from '../api/client';
 
 export default function ProductCard({ product, onSelectProduct }) {
   // Format price in Indian Rupees (₹)
@@ -12,10 +13,11 @@ export default function ProductCard({ product, onSelectProduct }) {
   };
 
   // Primary image fallback
-  const primaryImage =
+  const rawImage =
     product.images && product.images.length > 0
       ? product.images.find((img) => img.isPrimary)?.url || product.images[0].url
       : 'https://images.unsplash.com/photo-1535295972055-1c762f4483e5?w=800&auto=format&fit=crop&q=80';
+  const primaryImage = getAssetUrl(rawImage);
 
   // Availability badge configuration
   const getAvailabilityBadge = () => {

@@ -1,4 +1,18 @@
-const API_BASE = '/api';
+export const API_BASE = import.meta.env.VITE_API_URL
+  ? `${import.meta.env.VITE_API_URL.replace(/\/$/, '')}/api`
+  : '/api';
+
+export const getAssetUrl = (url) => {
+  if (!url) return '';
+  if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('data:')) {
+    return url;
+  }
+  const backendBase = import.meta.env.VITE_API_URL;
+  if (backendBase && url.startsWith('/uploads/')) {
+    return `${backendBase.replace(/\/$/, '')}${url}`;
+  }
+  return url;
+};
 
 // Helper for making standard JSON fetch requests
 async function request(endpoint, options = {}) {

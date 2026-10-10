@@ -32,7 +32,11 @@ app.use(
     origin: function (origin, callback) {
       // allow requests with no origin (like mobile apps, curl, or same-origin)
       if (!origin) return callback(null, true);
-      if (allowedOrigins.indexOf(origin) !== -1 || process.env.NODE_ENV === 'development') {
+      if (
+        allowedOrigins.indexOf(origin) !== -1 ||
+        process.env.NODE_ENV === 'development' ||
+        /\.vercel\.app$/.test(origin)
+      ) {
         return callback(null, true);
       }
       return callback(new Error('CORS policy: Not allowed by origin'));

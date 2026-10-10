@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { X, Sparkles, MapPin, Phone, MessageCircle, Info, CheckCircle2, AlertCircle } from 'lucide-react';
+import { getAssetUrl } from '../api/client';
 
 export default function ProductDetailModal({ product, onClose, storeSettings }) {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
@@ -21,7 +22,7 @@ export default function ProductDetailModal({ product, onClose, storeSettings }) 
   if (!product) return null;
 
   const images = product.images && product.images.length > 0
-    ? product.images
+    ? product.images.map((img) => ({ ...img, url: getAssetUrl(img.url) }))
     : [{ url: 'https://images.unsplash.com/photo-1535295972055-1c762f4483e5?w=1000&auto=format&fit=crop&q=80', alt: product.name }];
 
   const currentImage = images[activeImageIndex] || images[0];

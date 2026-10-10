@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { api } from '../../api/client';
+import { api, getAssetUrl } from '../../api/client';
 import AdminProductModal from './AdminProductModal';
 import {
   Package,
@@ -248,7 +248,8 @@ export default function AdminProducts() {
               </thead>
               <tbody className="divide-y divide-champagne-100">
                 {products.map((p) => {
-                  const thumb = p.images?.[0]?.url || 'https://images.unsplash.com/photo-1535295972055-1c762f4483e5?w=200&auto=format&fit=crop&q=80';
+                  const rawThumb = p.images?.[0]?.url || 'https://images.unsplash.com/photo-1535295972055-1c762f4483e5?w=200&auto=format&fit=crop&q=80';
+                  const thumb = getAssetUrl(rawThumb);
                   return (
                     <tr key={p._id} className="hover:bg-champagne-50/50 transition-colors">
                       {/* Image & Title */}

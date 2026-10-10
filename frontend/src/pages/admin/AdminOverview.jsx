@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { api } from '../../api/client';
+import { api, getAssetUrl } from '../../api/client';
 import {
   Package,
   CheckCircle,
@@ -217,7 +217,8 @@ export default function AdminOverview() {
 
           <div className="divide-y divide-champagne-200/70">
             {stats.recentProducts.map((p) => {
-              const img = p.images?.[0]?.url || 'https://images.unsplash.com/photo-1535295972055-1c762f4483e5?w=200&auto=format&fit=crop&q=80';
+              const rawImg = p.images?.[0]?.url || 'https://images.unsplash.com/photo-1535295972055-1c762f4483e5?w=200&auto=format&fit=crop&q=80';
+              const img = getAssetUrl(rawImg);
               return (
                 <div key={p._id} className="py-3.5 flex items-center justify-between gap-4">
                   <div className="flex items-center gap-3">
